@@ -1,6 +1,7 @@
 terraform {
-    required_version = "~> 1.6"
-    required_providers {
+  required_version = ">=1.0"
+
+  required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
       version = "~>3.0"
@@ -10,10 +11,8 @@ terraform {
       version = "~>3.0"
     }
   }
-  cloud {
-    organization = "CR460_Cloud_Infra"
-    workspaces {
-      name = "CR460_AZURE"
-    }
-  }
+}
+
+provider "azurerm" {
+  features {}
 }
