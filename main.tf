@@ -13,8 +13,6 @@ terraform {
     }
   }
 }
-
-
 resource "azurerm_resource_group" "example" {
   name     = "K21-ResourceGroup"
   location = "East US"
