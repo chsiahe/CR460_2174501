@@ -5,7 +5,7 @@ terraform {
     azurerm = {
       source  = "hashicorp/azurerm"
       version = "~>3.0"
-subscription_id = "<b8ee56be-3425-4ba0-9a55-18d26e4878c8>"
+  subscription_id = "<b8ee56be-3425-4ba0-9a55-18d26e4878c8>"
     }
     random = {
       source  = "hashicorp/random"
