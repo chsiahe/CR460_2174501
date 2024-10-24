@@ -25,42 +25,42 @@ provider "azurerm" {
   client_id       = "1dedf67b-6e22-4ac5-ac69-784706926fdd"
 }
   
-resource "azurerm_resource_group" "example" {
-  name     = "K21-ResourceGroup"
+resource "azurerm_resource_group" "CR460" {
+  name     = "CR460-ResourceGroup"
   location = "East US"
 }
 
-resource "azurerm_virtual_network" "example" {
-  name                = "K21-VNET"
+resource "azurerm_virtual_network" "CR460" {
+  name                = "CR460-VNET"
   address_space       = ["10.0.0.0/16"]
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.cr460.location
+  resource_group_name = azurerm_resource_group.cr460.name
 }
 
-resource "azurerm_subnet" "example" {
+resource "azurerm_subnet" "CR460" {
   name                 = "K21-Subnet"
-  resource_group_name  = azurerm_resource_group.example.name
-  virtual_network_name = azurerm_virtual_network.example.name
+  resource_group_name  = azurerm_resource_group.cr460.name
+  virtual_network_name = azurerm_virtual_network.cr460.name
   address_prefixes    = ["10.0.1.0/24"]
 }
 
-resource "azurerm_network_interface" "example" {
-  name                = "K21-NIC"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+resource "azurerm_network_interface" "CR460" {
+  name                = "CR460-NIC"
+  location            = azurerm_resource_group.cr460.location
+  resource_group_name = azurerm_resource_group.cr460.name
 
   ip_configuration {
     name                          = "internal"
-    subnet_id                     = azurerm_subnet.example.id
+    subnet_id                     = azurerm_subnet.cr460.id
     private_ip_address_allocation = "Dynamic"
   }
 }
 
-resource "azurerm_virtual_machine" "example" {
-  name                  = "K21-VM"
-  location              = azurerm_resource_group.example.location
-  resource_group_name   = azurerm_resource_group.example.name
-  network_interface_ids = [azurerm_network_interface.example.id]
+resource "azurerm_virtual_machine" "CR460" {
+  name                  = "CR460-VM"
+  location              = azurerm_resource_group.cr460.location
+  resource_group_name   = azurerm_resource_group.cr460.name
+  network_interface_ids = [azurerm_network_interface.cr460.id]
   vm_size               = "Standard_DS1_v2"
 
   storage_image_reference {
@@ -71,7 +71,7 @@ resource "azurerm_virtual_machine" "example" {
   }
 
   storage_os_disk {
-    name              = "exampleOSDisk"
+    name              = "cr460OSDisk"
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
