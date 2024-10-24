@@ -1,7 +1,19 @@
-provider "azurerm" {
-  features {}
-  subscription_id = "<b8ee56be-3425-4ba0-9a55-18d26e4878c8>"
+terraform {
+  required_version = ">=1.0"
+
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~>3.0"
+subscription_id = "<b8ee56be-3425-4ba0-9a55-18d26e4878c8>"
+    }
+    random = {
+      source  = "hashicorp/random"
+      version = "~>3.0"
+    }
+  }
 }
+
 
 resource "azurerm_resource_group" "example" {
   name     = "K21-ResourceGroup"
