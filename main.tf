@@ -27,7 +27,7 @@ provider "azurerm" {
   
 resource "azurerm_resource_group" "cr460"{
   name     = "CR460-ResourceGroup"
-  location = "(Africa) South Africa North"
+  location = "southafricanorth"
 }
 
 resource "azurerm_virtual_network" "cr460" {
