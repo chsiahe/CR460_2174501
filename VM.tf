@@ -34,7 +34,7 @@ resource "azurerm_virtual_machine" "cr460" {
   location              = azurerm_resource_group.cr460.location
   resource_group_name   = azurerm_resource_group.cr460.name
   network_interface_ids = [azurerm_network_interface.cr460.id]
-  vm_size               = "Standard_B1s - 1"
+  vm_size               = "Standard_D4s_v3"
 
   storage_image_reference {
     publisher = "Canonical"
