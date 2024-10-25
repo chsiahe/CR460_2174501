@@ -27,63 +27,63 @@ provider "azurerm" {
   
 resource "azurerm_resource_group" "cr460"{
   name     = "CR460-ResourceGroup"
-  location = "East US"
+  location = "(Africa) South Africa North"
 }
 
-resource "azurerm_virtual_network" "cr460" {
+#resource "azurerm_virtual_network" "cr460" {
   name                = "CR460-VNET"
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.cr460.location
   resource_group_name = azurerm_resource_group.cr460.name
 }
 
-resource "azurerm_subnet" "cr460" {
+#resource "azurerm_subnet" "cr460" {
   name                 = "K21-Subnet"
   resource_group_name  = azurerm_resource_group.cr460.name
   virtual_network_name = azurerm_virtual_network.cr460.name
   address_prefixes    = ["10.0.1.0/24"]
 }
 
-resource "azurerm_network_interface" "cr460" {
+#resource "azurerm_network_interface" "cr460" {
   name                = "CR460-NIC"
   location            = azurerm_resource_group.cr460.location
   resource_group_name = azurerm_resource_group.cr460.name
 
-  ip_configuration {
+  #ip_configuration {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.cr460.id
     private_ip_address_allocation = "Dynamic"
   }
 }
 
-#resource "azurerm_virtual_machine" "cr460" {
+resource "azurerm_virtual_machine" "cr460" {
   name                  = "CR460-VM"
   location              = azurerm_resource_group.cr460.location
   resource_group_name   = azurerm_resource_group.cr460.name
   network_interface_ids = [azurerm_network_interface.cr460.id]
   vm_size               = "Standard_DS1_v2"
 
-  #storage_image_reference {
+  storage_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"
     sku       = "16.04-LTS"
     version   = "latest"
   }
 
- # storage_os_disk {
+ storage_os_disk {
     name              = "cr460OSDisk"
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
   }
 
-#  os_profile {
+  os_profile {
     computer_name  = "hostname"
     admin_username = "adminuser"
     admin_password = "Password1234!"
   }
 
- # os_profile_linux_config {
+  os_profile_linux_config {
     disable_password_authentication = false
   }
 }
