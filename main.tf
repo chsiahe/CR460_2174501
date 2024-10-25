@@ -56,7 +56,7 @@ resource "azurerm_network_interface" "cr460" {
   }
 }
 
-resource "azurerm_virtual_machine" "cr460" {
+#resource "azurerm_virtual_machine" "cr460" {
   name                  = "CR460-VM"
   location              = azurerm_resource_group.cr460.location
   resource_group_name   = azurerm_resource_group.cr460.name
