@@ -25,26 +25,26 @@ provider "azurerm" {
   client_id       = "1dedf67b-6e22-4ac5-ac69-784706926fdd"
 }
   
-resource "azurerm_resource_group" {
+resource "azurerm_resource_group" "cr460"{
   name     = "CR460-ResourceGroup"
   location = "East US"
 }
 
-resource "azurerm_virtual_network" {
+resource "azurerm_virtual_network" "cr460" {
   name                = "CR460-VNET"
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.cr460.location
   resource_group_name = azurerm_resource_group.cr460.name
 }
 
-resource "azurerm_subnet"  {
+resource "azurerm_subnet" "cr460" {
   name                 = "K21-Subnet"
   resource_group_name  = azurerm_resource_group.cr460.name
   virtual_network_name = azurerm_virtual_network.cr460.name
   address_prefixes    = ["10.0.1.0/24"]
 }
 
-resource "azurerm_network_interface" {
+resource "azurerm_network_interface" "cr460" {
   name                = "CR460-NIC"
   location            = azurerm_resource_group.cr460.location
   resource_group_name = azurerm_resource_group.cr460.name
@@ -56,7 +56,7 @@ resource "azurerm_network_interface" {
   }
 }
 
-resource "azurerm_virtual_machine"  {
+resource "azurerm_virtual_machine" "cr460" {
   name                  = "CR460-VM"
   location              = azurerm_resource_group.cr460.location
   resource_group_name   = azurerm_resource_group.cr460.name
