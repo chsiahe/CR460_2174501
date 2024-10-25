@@ -30,31 +30,31 @@ resource "azurerm_resource_group" "cr460"{
   location = "(Africa) South Africa North"
 }
 
-#resource "azurerm_virtual_network" "cr460" {
- # name                = "CR460-VNET"
- # address_space       = ["10.0.0.0/16"]
-  #location            = azurerm_resource_group.cr460.location
-  #resource_group_name = azurerm_resource_group.cr460.name
-#}
+resource "azurerm_virtual_network" "cr460" {
+  name                = "CR460-VNET"
+  address_space       = ["10.0.0.0/16"]
+  location            = azurerm_resource_group.cr460.location
+  resource_group_name = azurerm_resource_group.cr460.name
+}
 
-#resource "azurerm_subnet" "cr460" {
- # name                 = "K21-Subnet"
- # resource_group_name  = azurerm_resource_group.cr460.name
- # virtual_network_name = azurerm_virtual_network.cr460.name
- # address_prefixes    = ["10.0.1.0/24"]
-#}
+resource "azurerm_subnet" "cr460" {
+  name                 = "K21-Subnet"
+  resource_group_name  = azurerm_resource_group.cr460.name
+  virtual_network_name = azurerm_virtual_network.cr460.name
+  address_prefixes    = ["10.0.1.0/24"]
+}
 
-#resource "azurerm_network_interface" "cr460" {
- # name                = "CR460-NIC"
-  #location            = azurerm_resource_group.cr460.location
- # resource_group_name = azurerm_resource_group.cr460.name
+resource "azurerm_network_interface" "cr460" {
+  name                = "CR460-NIC"
+  location            = azurerm_resource_group.cr460.location
+  resource_group_name = azurerm_resource_group.cr460.name
 
-  #ip_configuration {
-   # name                          = "internal"
-    #subnet_id                     = azurerm_subnet.cr460.id
-   # private_ip_address_allocation = "Dynamic"
- # }
-#}
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = azurerm_subnet.cr460.id
+    private_ip_address_allocation = "Dynamic"
+  }
+}
 
 resource "azurerm_virtual_machine" "cr460" {
   name                  = "CR460-VM"
