@@ -63,27 +63,27 @@ resource "azurerm_network_interface" "cr460" {
   network_interface_ids = [azurerm_network_interface.cr460.id]
   vm_size               = "Standard_DS1_v2"
 
-  storage_image_reference {
+  #storage_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"
     sku       = "16.04-LTS"
     version   = "latest"
   }
 
-  storage_os_disk {
+ # storage_os_disk {
     name              = "cr460OSDisk"
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
   }
 
-  os_profile {
+#  os_profile {
     computer_name  = "hostname"
     admin_username = "adminuser"
     admin_password = "Password1234!"
   }
 
-  os_profile_linux_config {
+ # os_profile_linux_config {
     disable_password_authentication = false
   }
 }
